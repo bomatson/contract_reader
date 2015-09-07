@@ -1,0 +1,16 @@
+{
+  "name" : "Contract Reader",
+  "version" : "1.1",
+  "description" : "Always knopw what you sign",
+  "background" : {
+    "scripts": ["background.js"],
+    "persistent": false
+  },
+  "page_action" :
+  {
+    "default_icon" : "contract.png",
+    "default_title" : "There's a contract in this page!"
+  },
+  "permissions": [ "declarativeContent" ],
+  "manifest_version": 2
+}
