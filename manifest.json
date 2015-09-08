@@ -8,9 +8,21 @@
   },
   "page_action" :
   {
-    "default_icon" : "contract.png",
-    "default_title" : "There's a contract in this page!"
+    "default_icon" : "contract-16.png",
+    "default_title" : "There's a contract in this page!",
+    "default_popup": "popup.html"
   },
-  "permissions": [ "declarativeContent" ],
+  "icons": {
+    "16": "contract-16.png",
+    "48": "contract-48.png",
+    "128": "contract-128.png"
+  },
+  "content_scripts": [
+    {
+      "matches": ["http://twitter.com/*", "https://twitter.com/*"],
+      "js": ["contractReader.js"]
+    }
+  ],
+  "permissions": [ "declarativeContent", "activeTab" ],
   "manifest_version": 2
 }

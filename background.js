@@ -3,7 +3,7 @@ chrome.runtime.onInstalled.addListener(function() {
     chrome.declarativeContent.onPageChanged.addRules([{
       conditions: [
         new chrome.declarativeContent.PageStateMatcher({
-          css: ['video']
+          pageUrl: { hostEquals: 'twitter.com', schemes: ['https'] },
         })
       ],
       actions: [new chrome.declarativeContent.ShowPageAction() ]
