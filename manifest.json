@@ -1,7 +1,7 @@
 {
   "name" : "Contract Reader",
   "version" : "1.1",
-  "description" : "Always knopw what you sign",
+  "description" : "Always know what you sign",
   "background" : {
     "scripts": ["background.js"],
     "persistent": false
@@ -17,12 +17,6 @@
     "48": "contract-48.png",
     "128": "contract-128.png"
   },
-  "content_scripts": [
-    {
-      "matches": ["http://twitter.com/*", "https://twitter.com/*"],
-      "js": ["contractReader.js"]
-    }
-  ],
   "permissions": [ "declarativeContent", "activeTab" ],
   "manifest_version": 2
 }
