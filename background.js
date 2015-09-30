@@ -10,3 +10,38 @@ chrome.runtime.onInstalled.addListener(function() {
     }]);
   });
 });
+
+var existingService = null;
+
+getServiceFrom = (url) => {
+  var parser;
+
+  if (typeof URL === 'function') {
+    parser = new URL(url);
+  } else {
+    parser = document.createElement('a');
+    parser.href = url;
+  }
+
+  return parser.hostname.replace(/\..*$/i,'')
+}
+
+buildRequest = (name) => {
+  return "https://contract-reader.herokuapp.com/services/" + name
+};
+
+chrome.tabs.onUpdated.addListener(function(id, changed, tab) {
+  if(changed.status !== 'complete') return;
+
+  var url = tab.url;
+  var service = getServiceFrom(url);
+  var requestUrl = buildRequest(service);
+
+  $.get(requestUrl)
+    .done(function( data ) {
+      if(existingService !== service) {
+        chrome.runtime.sendMessage(data)
+        existingService = service;
+      }
+    });
+});
