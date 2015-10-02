@@ -11,7 +11,7 @@ chrome.runtime.onInstalled.addListener(function() {
   });
 });
 
-var existingService = null;
+var currentService, serviceData;
 
 getServiceFrom = (url) => {
   var parser;
@@ -39,9 +39,13 @@ chrome.tabs.onUpdated.addListener(function(id, changed, tab) {
 
   $.get(requestUrl)
     .done(function( data ) {
-      if(existingService !== service) {
-        chrome.runtime.sendMessage(data)
-        existingService = service;
+      if(currentService !== service) {
+        currentService = service;
+        serviceData = data
       }
     });
+});
+
+chrome.runtime.onMessage.addListener(function (request, sender, sendResponse) {
+  sendResponse(serviceData)
 });
