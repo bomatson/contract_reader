@@ -9,7 +9,6 @@ module.exports = React.createClass({
 
   componentWillMount() {
     chrome.runtime.sendMessage('Hi there', (response) =>{
-      console.log(response.service)
       this.setState({service: response.service})
     })
   },
@@ -17,7 +16,6 @@ module.exports = React.createClass({
   render() {
     var service = this.state.service;
 
-    console.log(service)
     return (
       <div className='app'>
         { !!service && service.details.length > 0 ?

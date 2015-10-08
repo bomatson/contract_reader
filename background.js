@@ -1,17 +1,4 @@
-chrome.runtime.onInstalled.addListener(function() {
-  chrome.declarativeContent.onPageChanged.removeRules(undefined, function() {
-    chrome.declarativeContent.onPageChanged.addRules([{
-      conditions: [
-        new chrome.declarativeContent.PageStateMatcher({
-          pageUrl: { hostEquals: 'twitter.com', schemes: ['https'] },
-        })
-      ],
-      actions: [new chrome.declarativeContent.ShowPageAction() ]
-    }]);
-  });
-});
-
-var currentService, serviceData;
+var serviceData;
 
 getServiceFrom = (url) => {
   var parser;
@@ -23,29 +10,49 @@ getServiceFrom = (url) => {
     parser.href = url;
   }
 
-  return parser.hostname.replace(/\..*$/i,'')
+  var host = parser.hostname.split('.');
+  var result = host.sort( (a, b) => {
+    return b.length - a.length;
+  })[0];
+
+  return result;
 }
 
 buildRequest = (name) => {
-  return "https://contract-reader.herokuapp.com/services/" + name
+  return "http://localhost:5000/services/" + name
 };
 
-chrome.tabs.onUpdated.addListener(function(id, changed, tab) {
-  if(changed.status !== 'complete') return;
+chrome.tabs.onActivated.addListener(function(activeInfo) {
+  chrome.tabs.get(activeInfo.tabId, function (tab) {
+    fetchDetails(tab.url, tab.id);
+  });
+});
 
-  var url = tab.url;
+chrome.tabs.onUpdated.addListener(function(tabId, changeInfo, updatedTab) {
+  if(changeInfo.status !== 'complete') return;
+
+  chrome.tabs.query({'active': true}, function (activeTabs) {
+    var activeTab = activeTabs[0];
+
+    if (activeTab.id == updatedTab.id) {
+      fetchDetails(activeTab.url, activeTab.id);
+    }
+  });
+});
+
+function fetchDetails(url, tabId) {
   var service = getServiceFrom(url);
   var requestUrl = buildRequest(service);
 
   $.get(requestUrl)
     .done(function( data ) {
-      if(currentService !== service) {
-        currentService = service;
-        serviceData = data
-      }
+      if (!!data.error) return
+      serviceData = data
+      chrome.pageAction.show(tabId)
     });
-});
+}
 
 chrome.runtime.onMessage.addListener(function (request, sender, sendResponse) {
   sendResponse(serviceData)
 });
+
