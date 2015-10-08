@@ -1,5 +1,26 @@
-.app {
-  .results {
+@import url(https://fonts.googleapis.com/css?family=Roboto);
 
-  }
+html, body {
+  font-family: 'Roboto';
+  font-size: 16px;
+  font-weight: normal;
+}
+
+body {
+  margin: 0;
+}
+
+.app {
+  padding: 1rem;
+  min-width: 300px;
+  text-align: center;
+  background-color: red;
+}
+
+.app.control {
+  background-color: whitesmoke;
+}
+
+.title {
+
 }

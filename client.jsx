@@ -1,4 +1,8 @@
 import React from 'react'
 import App from './src/App'
 
-React.render(<App />, document.getElementById('app'));
+chrome.runtime.sendMessage('Hi there', (response) =>{
+  if(!!response)
+    React.render(<App service={response.service}/>, document.getElementById('app'));
+})
+

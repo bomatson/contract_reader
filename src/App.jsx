@@ -1,27 +1,27 @@
 import '../style.css'
 import React from 'react'
-import ContractDetails from './ContractDetails'
+import ServiceDetails from './ServiceDetails'
 
 module.exports = React.createClass({
-  getInitialState() {
-    return({});
-  },
-
-  componentWillMount() {
-    chrome.runtime.sendMessage('Hi there', (response) =>{
-      this.setState({service: response.service})
-    })
-  },
-
   render() {
-    var service = this.state.service;
+    var service = this.props.service;
+    var className = 'app';
+    var answer = 'NO';
+
+    if(service.in_control) {
+      answer = 'YES';
+      className += ' control'
+    }
 
     return (
-      <div className='app'>
-        { !!service && service.details.length > 0 ?
+      <div className={className}>
+        { service.details.length > 0 ?
           <div>
-            { service.title }
-            <ContractDetails details={service.details} />
+            <h3 className='title'>
+              Do You Control Your Content?
+            </h3>
+            { answer }
+            <ServiceDetails details={service.details} />
           </div>
           : null
         }
