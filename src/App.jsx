@@ -10,7 +10,10 @@ module.exports = React.createClass({
 
     if(service.in_control) {
       answer = 'YES';
-      className += ' control'
+      className += ' yes'
+    } else if(service.in_control == null) {
+      answer = 'KINDA';
+      className += ' kinda'
     }
 
     return (
@@ -20,7 +23,7 @@ module.exports = React.createClass({
             <h3 className='title'>
               Do You Control Your Content?
             </h3>
-            { answer }
+            <h2>{ answer }</h2>
             <ServiceDetails details={service.details} />
           </div>
           : null

@@ -1,4 +1,5 @@
 import React from 'react'
+import Detail from './Detail'
 
 module.exports = React.createClass({
   propTypes: {
@@ -7,8 +8,9 @@ module.exports = React.createClass({
 
   render() {
     var details = this.props.details.map((detail, i) => {
-      return <div key={i}>{detail.title}</div>
-    })
+      return <Detail key={i} detail={detail} / >;
+    });
+
     return (
       <div>
         { details }

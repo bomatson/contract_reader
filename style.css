@@ -1,7 +1,7 @@
-@import url(https://fonts.googleapis.com/css?family=Roboto);
+@import url(https://fonts.googleapis.com/css?family=Open+Sans);
 
 html, body {
-  font-family: 'Roboto';
+  font-family: 'Open Sans', sans-serif;
   font-size: 16px;
   font-weight: normal;
 }
@@ -14,13 +14,43 @@ body {
   padding: 1rem;
   min-width: 300px;
   text-align: center;
-  background-color: red;
+  background-color: whitesmoke;
+  height: 100%;
 }
 
-.app.control {
-  background-color: whitesmoke;
+.app h2 {
+  color: red;
+}
+
+.app.yes h2 {
+  color: green;
+}
+
+.app.kinda h2 {
+  color: black;
 }
 
 .title {
+  margin-top: 0;
+}
 
+.detail-container {
+  margin-bottom: 1rem;
+  background-color: rgba(220,118,118,0.68);
+  padding: 1rem;
+  border-radius: 1rem;
+}
+
+.detail-container.good {
+  background-color: rgba(183,228,178,0.85);
+}
+
+.detail-container a{
+  cursor: pointer;
+  color: red;
+  display: block;
+}
+
+.detail-container.good a {
+  color: green;
 }
