@@ -3,8 +3,18 @@ import React from 'react'
 import ServiceDetails from './ServiceDetails'
 
 module.exports = React.createClass({
+  getInitialState() {
+    return {service: {}};
+  },
+
+  componentWillMount() {
+    chrome.runtime.sendMessage('Hi there', (response) =>{
+      this.setState({service: response.service})
+    })
+  },
+
   render() {
-    var service = this.props.service;
+    var service = this.state.service;
     var className = 'app';
     var answer = 'NO';
 
@@ -18,7 +28,7 @@ module.exports = React.createClass({
 
     return (
       <div className={className}>
-        { service.details.length > 0 ?
+        { !!service.details ?
           <div>
             <h3 className='title'>
               Do You Control Your Content?
@@ -26,7 +36,7 @@ module.exports = React.createClass({
             <h2>{ answer }</h2>
             <ServiceDetails details={service.details} />
           </div>
-          : null
+          : <div>Loading</div>
         }
       </div>
     )

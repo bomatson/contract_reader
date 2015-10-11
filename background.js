@@ -35,7 +35,7 @@ chrome.tabs.onUpdated.addListener(function(tabId, changeInfo, updatedTab) {
     var activeTab = activeTabs[0];
 
     if (activeTab.id == updatedTab.id) {
-      fetchDetails(activeTab.url, activeTab.id);
+      fetchDetails(updatedTab.url, updatedTab.id);
     }
   });
 });

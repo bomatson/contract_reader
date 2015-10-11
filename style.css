@@ -19,7 +19,7 @@ body {
 }
 
 .app h2 {
-  color: red;
+  color: #BD0808;
 }
 
 .app.yes h2 {
@@ -47,7 +47,7 @@ body {
 
 .detail-container a{
   cursor: pointer;
-  color: red;
+  color: #BD0808;
   display: block;
 }
 
