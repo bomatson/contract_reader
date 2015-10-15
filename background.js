@@ -19,7 +19,7 @@ getServiceFrom = (url) => {
 }
 
 buildRequest = (name) => {
-  return "http://localhost:5000/services/" + name
+  return "https://contract-reader.herokuapp.com/services/" + name
 };
 
 chrome.tabs.onActivated.addListener(function(activeInfo) {
