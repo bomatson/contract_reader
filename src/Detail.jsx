@@ -1,4 +1,5 @@
 import React from 'react'
+import Tracker from './services/Tracker'
 
 module.exports = React.createClass({
   propTypes: {
@@ -12,10 +13,14 @@ module.exports = React.createClass({
   },
 
   learnMore() {
+    var title = this.props.detail.title;
+    Tracker.sendEvent('Detail', 'Learn More', title);
     this.setState({learnMore: true})
   },
 
   goBack() {
+    var title = this.props.detail.title;
+    Tracker.sendEvent('Detail', 'Go Back', title);
     this.setState({learnMore: false})
   },
 

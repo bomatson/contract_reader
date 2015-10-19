@@ -1,6 +1,7 @@
 {
   "name" : "Contract Reader",
-  "version" : "0.0.1",
+  "short_name" : "CR",
+  "version" : "0.0.3",
   "description" : "Always know what you sign",
   "background" : {
     "scripts": ["node_modules/jquery/dist/jquery.min.js", "background.js"],
@@ -9,7 +10,7 @@
   "page_action" :
   {
     "default_icon" : "contract-16.png",
-    "default_title" : "There's a contract in this page!",
+    "default_title" : "Do you control your content?",
     "default_popup": "popup.html"
   },
   "icons": {
@@ -18,10 +19,11 @@
     "128": "contract-128.png"
   },
   "permissions": [
+    "https://www.google-analytics.com/",
+    "storage",
     "declarativeContent",
     "tabs",
-    "https://contract-reader.herokuapp.com/",
-    "http://localhost:5000/"
+    "https://contract-reader.herokuapp.com/"
     ],
   "manifest_version": 2
 }

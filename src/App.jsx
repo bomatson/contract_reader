@@ -1,6 +1,7 @@
 import '../style.css'
 import React from 'react'
 import ServiceDetails from './ServiceDetails'
+import Tracker from './services/Tracker'
 
 module.exports = React.createClass({
   getInitialState() {
@@ -9,7 +10,10 @@ module.exports = React.createClass({
 
   componentWillMount() {
     chrome.runtime.sendMessage('Hi there', (response) =>{
-      this.setState({service: response.service})
+      var service = response.service;
+      Tracker.sendEvent('Service', 'Rendered', service.title);
+
+      this.setState({service})
     })
   },
 
